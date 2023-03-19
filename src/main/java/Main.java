@@ -1,21 +1,38 @@
-import java.util.Scanner;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
 
 public class Main {
     public static void main(String args[]) {
-        //Meal initialization
-        meal[] meals;
-        meals = new meal[21];
+        String totd = "";
 
-        Scanner input = new Scanner(System.in);
-
-        //Opening Screen
-        System.out.println
-                ("Welcome to Unnamed Meal Plan App, Press A to add a meal, D to delete a meal, or L to list meals. ");
-
-        String choice = input.nextLine();
-
-        //Opening Screen Input
-        if(choice.equals("A")){
+        //Home Screen Initialization
+        JFrame f = new JFrame();
+        JLabel l1 = new JLabel("Welcome to Unnamed Meal Plan App");
+        l1.setBounds(175, 0, 200, 25);
+        JButton bEditMeals = new JButton("Edit Meal List");
+        bEditMeals.setBounds(175, 50, 200, 25);
+        JButton bSortPlan = new JButton("Organize Meal Plan");
+        bSortPlan.setBounds(175, 80, 200, 25);
+        JButton bViewList = new JButton("View Shopping List");
+        bViewList.setBounds(175, 110, 200, 25);
+        JButton bViewHist = new JButton("View History");
+        bViewHist.setBounds(175, 140, 200, 25);
+        JLabel l2 = new JLabel("Tip: " + totd);
+        l2.setBounds(100, 225, 200, 25);
+        f.add(l1); f.add(bEditMeals); f.add(bSortPlan); f.add(bViewList); f.add(bViewHist); f.add(l2);
+        f.setSize(600,300);
+        f.setLayout(null);
+        f.setVisible(true);
+        bEditMeals.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EditMealList.EditList();
+                f.setVisible(false);
+                f.dispose();
+            }
+        });
+        /*if(choice.equals("A")){
             for(int i = 0; i <= 20; i++){
                 System.out.println("Please add a meal name: ");
                 String mealNameIn = input.nextLine();
@@ -26,14 +43,6 @@ public class Main {
         //List Meals
         for(int i = 0; i <= 20; i++){
             System.out.println((i + 1) + ". " + meals[i].name + "\n");
-        }
-    }
-}
-
-class meal {
-    public String name;
-
-    meal(String name){
-        this.name = name;
+        }*/
     }
 }
