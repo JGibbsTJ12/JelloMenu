@@ -1,3 +1,5 @@
+import com.formdev.flatlaf.FlatLightLaf;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -6,7 +8,9 @@ public class Main {
     public static void main(String args[]) {
         String totd = "";
 
+
         //Home Screen Initialization
+        FlatLightLaf.setup();
         JFrame f = new JFrame();
         JLabel l1 = new JLabel("Welcome to Unnamed Meal Plan App");
         l1.setBounds(175, 0, 200, 25);
@@ -24,6 +28,8 @@ public class Main {
         f.setSize(600,300);
         f.setLayout(null);
         f.setVisible(true);
+
+        //Edit Meals Option
         bEditMeals.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -32,17 +38,5 @@ public class Main {
                 f.dispose();
             }
         });
-        /*if(choice.equals("A")){
-            for(int i = 0; i <= 20; i++){
-                System.out.println("Please add a meal name: ");
-                String mealNameIn = input.nextLine();
-                meals[i] = new meal(mealNameIn);
-            }
-        }
-
-        //List Meals
-        for(int i = 0; i <= 20; i++){
-            System.out.println((i + 1) + ". " + meals[i].name + "\n");
-        }*/
     }
 }
