@@ -4,13 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="71560842-5995-4940-8450-8b6f31102701" name="Changes" comment="UI (Placeholder), New EditMealList class">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Meals.java" afterDir="false" />
+    <list default="true" id="71560842-5995-4940-8450-8b6f31102701" name="Changes" comment="Edit Meal List Menu, Almost Full Functionality">
+      <change afterPath="$PROJECT_DIR$/Meal.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/Meals.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Meal.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/EditMealList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EditMealList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/EditMealList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/EditMealList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Meals.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,29 +51,33 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2N9Pr0jPqp3IZJeJOn8KcpFQDBz" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "XML"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;XML&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\thein\IdeaProjects\MealPlanApp\src\main\resources" />
+      <recent name="C:\Users\thein\IdeaProjects\MealPlanApp\src\main\java\MealPlan" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -103,13 +110,22 @@
       <option name="project" value="LOCAL" />
       <updated>1679203601262</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Edit Meal List Menu, Almost Full Functionality">
+      <created>1679374628861</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1679374628861</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="first class" />
     <MESSAGE value="Added placeholder opening screen, added ability to add meals to list of meals" />
     <MESSAGE value="UI (Placeholder), New EditMealList class" />
-    <option name="LAST_COMMIT_MESSAGE" value="UI (Placeholder), New EditMealList class" />
+    <MESSAGE value="Edit Meal List Menu, Almost Full Functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edit Meal List Menu, Almost Full Functionality" />
   </component>
 </project>

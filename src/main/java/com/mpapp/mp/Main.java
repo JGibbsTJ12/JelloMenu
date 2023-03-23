@@ -1,3 +1,5 @@
+package com.mpapp.mp;
+
 import com.formdev.flatlaf.FlatLightLaf;
 
 import java.awt.event.ActionEvent;
@@ -7,7 +9,6 @@ import javax.swing.*;
 public class Main {
     public static void main(String args[]) {
         String totd = "";
-
 
         //Home Screen Initialization
         FlatLightLaf.setup();
@@ -29,7 +30,7 @@ public class Main {
         f.setLayout(null);
         f.setVisible(true);
 
-        //Edit Meals Option
+        //Edit MealPlan.Meals Option
         bEditMeals.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
