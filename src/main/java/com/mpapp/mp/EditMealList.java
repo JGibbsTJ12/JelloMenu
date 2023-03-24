@@ -21,7 +21,7 @@ public class EditMealList{
         JFrame f = new JFrame();
         JTextArea tf = new JTextArea();
         JLabel l1 = new JLabel
-                ("Use the Text Box for Notes/MealPlan.Meals, Highlight Meal Names to Add Them to Plan");
+                ("Use the Text Box for Notes");
         l1.setBounds(30, 5, 600, 25);
         tf.setBounds(0, 30, 600, 150);
         JButton bAddIng = new JButton("Add Ingredients");
@@ -56,21 +56,51 @@ public class EditMealList{
     }
 
     public static void addMeal(String m){
-        final StandardServiceRegistry ssr = new StandardServiceRegistryBuilder()
-                .configure().build();
-        try {
-            sessionFactory = new MetadataSources(ssr).buildMetadata().buildSessionFactory();
-            System.out.println("DB Init Successful");
-        }
-        catch (Exception e) {
-            StandardServiceRegistryBuilder.destroy(ssr);
-            System.out.println("DB Init Failed");
-        }
         //Add Meal Functionality
         JFrame amf = new JFrame();
-        amf.setSize(300,150);
+        amf.setSize(300,200);
         JLabel mc = new JLabel("Configure Meal");
+        mc.setBounds(5, 5, 100, 25);
+        JLabel mn = new JLabel("Name:");
+        JTextField mnf = new JTextField();
+        mn.setBounds(10, 45, 100, 25);
+        mnf.setBounds(110, 45, 100, 25);
+        JLabel ms = new JLabel("Serving Count:");
+        JTextField msf = new JTextField();
+        ms.setBounds(10, 85, 100, 25);
+        msf.setBounds(110, 85, 100, 25);
+        JButton my = new JButton("Confirm");
+        my.setBounds(75, 125, 100, 25);
+        amf.add(mc); amf.add(mn); amf.add(mnf); amf.add(ms); amf.add(msf); amf.add(my);
         amf.setLayout(null);
         amf.setVisible(true);
+
+        my.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent f) {
+                final StandardServiceRegistry ssr = new StandardServiceRegistryBuilder()
+                        .configure().build();
+                try {
+                    sessionFactory = new MetadataSources(ssr).buildMetadata().buildSessionFactory();
+                    System.out.println("DB Init Successful");
+                }
+                catch (Exception e) {
+                    StandardServiceRegistryBuilder.destroy(ssr);
+                    System.out.println("DB Init Failed");
+                }
+                Session session = sessionFactory.openSession();
+                session.beginTransaction();
+                    Meals m1 = new Meals();
+                    m1.setName(mnf.getText());
+                    m1.setServings(Integer.parseInt(msf.getText()));
+                    session.persist(m1);
+                    session.getTransaction().commit();
+                    System.out.println("DB Save Success");
+                    sessionFactory.close();
+                    session.close();
+                amf.setVisible(false);
+                amf.dispose();
+            }
+        });
     }
 }
