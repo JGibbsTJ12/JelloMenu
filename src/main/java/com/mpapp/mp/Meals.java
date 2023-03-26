@@ -1,15 +1,17 @@
 package com.mpapp.mp;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "MEALS")
 public class Meals {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int mealid;
     private String name;
     private int servings;
+
 
     public String getName() { return name; }
 
@@ -18,4 +20,8 @@ public class Meals {
     public int getServings() { return servings; }
 
     public void setServings(int servings) { this.servings = servings; }
+
+    public int getMealid() { return mealid; }
+
+    public void setMealid(int mealid) { this.mealid = mealid; }
 }

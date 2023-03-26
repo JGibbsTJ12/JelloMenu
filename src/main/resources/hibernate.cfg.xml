@@ -17,7 +17,5 @@
 
         <property name="hibernate.connection.username"></property>
         <property name="hibernate.connection.password"></property>
-
-        <mapping class="com.mpapp.mp.Meals"/>
     </session-factory>
 </hibernate-configuration>
