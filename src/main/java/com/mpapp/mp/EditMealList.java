@@ -11,6 +11,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.*;
 public class EditMealList{
@@ -90,7 +91,7 @@ public class EditMealList{
                         .build();
                 System.out.println("DB Init Successful");
 
-                //Adding meal and meal id to meal table and junction table
+                //Adding meal to meal table
                 Session session = sessionFactory.openSession();
                 session.beginTransaction();
                     Meals m1 = new Meals();
@@ -98,8 +99,6 @@ public class EditMealList{
                     m1.setName(mnf.getText());
                     m1.setServings(Integer.parseInt(msf.getText()));
                     session.persist(m1);
-                    mij1.setMealid(m1.getMealid());
-                    session.persist(mij1);
                     session.getTransaction().commit();
                     System.out.println("DB Save Success");
                     sessionFactory.close();
@@ -110,8 +109,29 @@ public class EditMealList{
         });
     }
     public static void addIng(String i){
+        //Generating List of Meals for Window
+        //AddIngredient Functionality
+        final StandardServiceRegistry ssr = new StandardServiceRegistryBuilder()
+                .configure().build();
+        Metadata metadata = new MetadataSources(ssr)
+                .addAnnotatedClass(Meals.class)
+                .addAnnotatedClass(MealIngJunc.class)
+                .getMetadataBuilder()
+                .build();
+        SessionFactory sessionFactory = metadata.getSessionFactoryBuilder()
+                .build();
+        System.out.println("DB Init Successful");
+        Session session = sessionFactory.openSession();
+        List results = session.createQuery("SELECT name FROM Meals").list();
+        sessionFactory.close();
+        session.close();
+        String[] mealList = new String[results.size()];
+        for(int x = 0; x < results.size(); x++)
+            mealList[x] = (String) results.get(x);
+
+        //Window Init
         JFrame aif = new JFrame();
-        aif.setSize(300,300);
+        aif.setSize(270,300);
         JLabel ic = new JLabel("Configure Ingredient");
         ic.setBounds(5, 5, 150, 25);
         JLabel in = new JLabel("Name:");
@@ -127,11 +147,50 @@ public class EditMealList{
         JComboBox icb = new JComboBox(meas);
         icb.setBounds(110, 125, 100, 25);
         im.setBounds(10, 125, 100, 25);
+        JLabel ime = new JLabel("Meal:");
+        JComboBox iml = new JComboBox(mealList);
+        iml.setBounds(110, 165, 100, 25);
+        ime.setBounds(10, 165, 100, 25);
         JButton iy = new JButton("Confirm");
-        iy.setBounds(75, 155, 100, 25);
+        iy.setBounds(75, 210, 100, 25);
         aif.add(ic); aif.add(in); aif.add(inf); aif.add(is);
         aif.add(isf); aif.add(iy); aif.add(icb); aif.add(im);
+        aif.add(iml);
         aif.setLayout(null);
         aif.setVisible(true);
+
+        iy.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //DB Init
+                final StandardServiceRegistry ssr = new StandardServiceRegistryBuilder()
+                        .configure().build();
+                Metadata metadata = new MetadataSources(ssr)
+                        .addAnnotatedClass(Meals.class)
+                        .addAnnotatedClass(MealIngJunc.class)
+                        .addAnnotatedClass(Ingredients.class)
+                        .getMetadataBuilder()
+                        .build();
+                SessionFactory sessionFactory = metadata.getSessionFactoryBuilder()
+                        .build();
+                /*Adds Ingredient to Ingredient Table and Junctions
+                Meal and Ingredient to Junction Table*/
+                Session session = sessionFactory.openSession();
+                session.beginTransaction();
+                    Ingredients i = new Ingredients();
+                    MealIngJunc mij = new MealIngJunc();
+                    i.setName(inf.getText());
+                    i.setAmount(Integer.parseInt(isf.getText()));
+                    i.setAmtmsmt(meas[icb.getSelectedIndex()]);
+                    session.persist(i);
+                    mij.setIngid(i.getId());
+                    mij.setMealid(iml.getSelectedIndex() + 1);
+                    session.persist(mij);
+                    session.getTransaction().commit();
+                    System.out.println("DB Save Success");
+                    session.close();
+                    sessionFactory.close();
+            }
+        });
     }
 }

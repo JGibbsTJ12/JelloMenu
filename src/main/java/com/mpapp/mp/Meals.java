@@ -8,8 +8,11 @@ import org.hibernate.annotations.GenericGenerator;
 public class Meals {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "MEALID")
     private int mealid;
+    @Column(name = "NAME")
     private String name;
+    @Column(name = "SERVINGS")
     private int servings;
 
 

@@ -1,20 +1,21 @@
 package com.mpapp.mp;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "INGREDIENTS")
 public class Ingredients {
 
-    @Id
+
+    @Column(name = "NAME")
     private String name;
+    @Column(name = "AMOUNT")
     private int amount;
+    @Column(name = "AMTMSMT")
     private String amtmsmt;
-    @GeneratedValue
-    @GenericGenerator(name="increment", strategy = "increment")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "INGID")
     private int id;
 
     public String getName() { return name; }
