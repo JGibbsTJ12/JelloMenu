@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="71560842-5995-4940-8450-8b6f31102701" name="Changes" comment="Edit Meal List Rework, Finished Add Meal, Add Ingredient Changes">
+    <list default="true" id="71560842-5995-4940-8450-8b6f31102701" name="Changes" comment="Edit Meal List Completely Finished and Commented">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/OrganizePlan.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Meal.db" beforeDir="false" afterPath="$PROJECT_DIR$/Meal.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/EditMealList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/EditMealList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/Ingredients.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/Ingredients.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/Meals.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/Meals.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +45,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2N9Pr0jPqp3IZJeJOn8KcpFQDBz" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -135,7 +138,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679808703623</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Edit Meal List Completely Finished and Commented">
+      <created>1679939468863</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1679939468863</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -147,7 +157,8 @@
     <MESSAGE value="Full SQLite Integration, Edit Meal List Rework (In Progress)" />
     <MESSAGE value="Edit Meal List Rework (Mostly Done), Database Functionality Added" />
     <MESSAGE value="Edit Meal List Rework, Finished Add Meal, Add Ingredient Changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Edit Meal List Rework, Finished Add Meal, Add Ingredient Changes" />
+    <MESSAGE value="Edit Meal List Completely Finished and Commented" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edit Meal List Completely Finished and Commented" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MealPlanApp$Main.ic" NAME="Main Coverage Results" MODIFIED="1679629887734" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

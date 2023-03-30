@@ -1,6 +1,5 @@
 package com.mpapp.mp;
 
-import org.hibernate.query.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
@@ -8,7 +7,6 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -17,7 +15,7 @@ import javax.swing.*;
 public class EditMealList{
     public static void EditList() {
         //Window Initialization
-        JFrame f = new JFrame();
+        JFrame f = new JFrame("Edit Meal List");
         JTextArea tf = new JTextArea();
         JLabel l1 = new JLabel
                 ("Use the Text Box for Notes");
@@ -57,7 +55,7 @@ public class EditMealList{
     }
     public static void addMeal(String m){
         //Add Meal Window
-        JFrame amf = new JFrame();
+        JFrame amf = new JFrame("Add Meal");
         amf.setSize(300,200);
         JLabel mc = new JLabel("Configure Meal");
         mc.setBounds(5, 5, 100, 25);
@@ -95,7 +93,6 @@ public class EditMealList{
                 Session session = sessionFactory.openSession();
                 session.beginTransaction();
                     Meals m1 = new Meals();
-                    MealIngJunc mij1 = new MealIngJunc();
                     m1.setName(mnf.getText());
                     m1.setServings(Integer.parseInt(msf.getText()));
                     session.persist(m1);
@@ -130,7 +127,7 @@ public class EditMealList{
             mealList[x] = (String) results.get(x);
 
         //Window Init
-        JFrame aif = new JFrame();
+        JFrame aif = new JFrame("Add Ingredients");
         aif.setSize(270,300);
         JLabel ic = new JLabel("Configure Ingredient");
         ic.setBounds(5, 5, 150, 25);
