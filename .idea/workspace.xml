@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="71560842-5995-4940-8450-8b6f31102701" name="Changes" comment="OrganizePlan Window Created, Functionality WIP">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/Plan.java" afterDir="false" />
+    <list default="true" id="71560842-5995-4940-8450-8b6f31102701" name="Changes" comment="OrganizePlan Functionality WIP">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/DayMealJunc.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/WeekDayJunc.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Meal.db" beforeDir="false" afterPath="$PROJECT_DIR$/Meal.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/OrganizePlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/OrganizePlan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/Plan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/Week.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +153,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680153584140</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="OrganizePlan Functionality WIP">
+      <created>1680497974620</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1680497974620</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -165,7 +174,8 @@
     <MESSAGE value="Edit Meal List Rework, Finished Add Meal, Add Ingredient Changes" />
     <MESSAGE value="Edit Meal List Completely Finished and Commented" />
     <MESSAGE value="OrganizePlan Window Created, Functionality WIP" />
-    <option name="LAST_COMMIT_MESSAGE" value="OrganizePlan Window Created, Functionality WIP" />
+    <MESSAGE value="OrganizePlan Functionality WIP" />
+    <option name="LAST_COMMIT_MESSAGE" value="OrganizePlan Functionality WIP" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MealPlanApp$Main.ic" NAME="Main Coverage Results" MODIFIED="1679629887734" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
