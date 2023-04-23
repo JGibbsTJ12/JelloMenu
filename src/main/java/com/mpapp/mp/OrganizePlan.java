@@ -11,65 +11,65 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 import java.util.List;
 
 public class OrganizePlan {
     public static void SortPlan() {
         fillInfo();
-        //Window Init
-        JFrame f = new JFrame("Organize Meal Plan");
-        JPanel p = new JPanel(); f.setSize(600, 300);
-        JButton c = new JButton("Confirm"); c.setBounds(475, 230, 100, 25);
-        p.setBounds(0, 0, 400, 1000);
-        JScrollPane opp = new JScrollPane(p); opp.setBounds(150, 10, 400, 210);
-        opp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        opp.setBorder(BorderFactory.createTitledBorder("Week"));
-        String[] days = {"Monday", "Tuesday", "Wednesday",
-                "Thursday", "Friday", "Saturday", "Sunday"};
-        JComboBox day1 = new JComboBox(days);
-        day1.setBounds(5, 5, 125, 25);
-        String[] meals1 = new String[mName.size() + 1];
-        String[] meals2 = new String[mName.size() + 1];
-        String[] meals3 = new String[mName.size() + 1];
-        meals1[0] = "Breakfast";
-        meals2[0] = "Lunch";
-        meals3[0] = "Dinner";
-        for (int x = 1; x < mName.size() + 1; x++)
-            meals1[x] = (String) mName.get(x - 1);
-        for (int y = 1; y < mName.size() + 1; y++)
-            meals2[y] = (String) mName.get(y - 1);
-        for (int z = 1; z < mName.size() + 1; z++)
-            meals3[z] = (String) mName.get(z - 1);
-        JComboBox meal1 = new JComboBox(meals1);
-        JComboBox meal2 = new JComboBox(meals2);
-        JComboBox meal3 = new JComboBox(meals3);
-        JTextArea mta = new JTextArea("Notes");
-        mta.setLineWrap(true);
-        mta.setBounds(5, 75, 380, 125);
-        meal1.setBounds(5, 40, 90, 25);
-        meal2.setBounds(105, 40, 90, 25);
-        meal3.setBounds(205, 40, 90, 25);
-
-        JComboBox wcb = new JComboBox(weeks);
-        JButton nwb = new JButton("New");
-        nwb.setToolTipText("Making a new week will permanently save the previous.");
-        wcb.setBounds(5, 10, 120, 25);
-        nwb.setBounds(5, 45, 60, 25);
-        p.add(day1); p.add(meal1); p.add(meal2); p.add(meal3); p.add(mta);
-        f.add(opp); f.add(c); f.add(wcb); f.add(nwb);
-        p.setLayout(null);
-        f.setLayout(null);
-        f.setVisible(true);
     }
 
     public static void fillInfo(){
+        final StandardServiceRegistry ssr = new StandardServiceRegistryBuilder()
+                .configure().build();
+        Metadata metadata = new MetadataSources(ssr)
+                .addAnnotatedClass(Meals.class)
+                .addAnnotatedClass(Ingredients.class)
+                .addAnnotatedClass(Week.class)
+                .getMetadataBuilder()
+                .build();
+        SessionFactory sessionFactory = metadata.getSessionFactoryBuilder()
+                .build();
+        Session session = sessionFactory.openSession();
 
+        List results1 = session.createQuery("SELECT weekID from Week").list();
+        List results2 = session.createQuery("SELECT name FROM Meals").list();
+        String[] weekList = new String[results1.size() + 1];
+        String[] mealList = new String[results2.size()];
+        listtoArr(results1, weekList);
+        listtoArr(results2, mealList);
+        weekList[weekList.length - 1] = newWeek();
+        session.beginTransaction();
+            Week w1 = new Week(); Week w2 = new Week(); Week w3 = new Week(); Week w4 = new Week(); Week w5 = new Week(); Week w6 = new Week(); Week w7 = new Week();
+            Week[] wa = new Week[]  {w1, w2, w3, w4, w5, w6, w7};
+            String[] days = new String[]    {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+            for(int a = 0; a < 7; a++){
+                wa[a].setWeekID(weekList[weekList.length - 1]);
+            }
+            for(int b = 0; b < 7; b++){
+                wa[b].setDay(days[b]);
+            }
+            for(int c = 0; c < 7; c++){
+                session.persist(wa[c]);
+            }
+            session.getTransaction().commit();
+            session.close();
     }
 
     public static String newWeek(){
-        Date date = new Date();
+        LocalDate date = LocalDate.now();
+        date = date.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
         SimpleDateFormat fmat = new SimpleDateFormat("MM/dd/yyyy");
-        return fmat.format(date);
+        return date.toString();
+    }
+
+    public static String[] listtoArr(List l, String[] a){
+        for(int x = 0; x < l.size(); x++)
+            a[x] = (String) l.get(x);
+        return a;
     }
 }

@@ -8,11 +8,13 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "WEEK")
 public class Week {
-    @Id
     @Column(name = "WEEK")
     private String weekID;
     @Column(name = "NOTES")
     private String notes;
+    @Id
+    @Column(name = "DAY")
+    private String day;
 
     public String getWeekID() { return weekID; }
     public void setWeekID(String weekID) {
@@ -20,4 +22,12 @@ public class Week {
     }
     public String getNotes() { return notes; }
     public void setNotes(String notes) { this.notes = notes; }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
 }

@@ -1,5 +1,6 @@
 package com.mpapp.mp;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -8,7 +9,9 @@ import jakarta.persistence.Table;
 @Table(name = "MEAL_ING_JUNC")
 public class MealIngJunc {
     @Id
+    @Column(name="MEALID")
     private int mealid;
+    @Column(name="INGID")
     private int ingid;
 
     public int getMealid() { return mealid; }
