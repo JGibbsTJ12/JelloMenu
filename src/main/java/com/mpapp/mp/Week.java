@@ -1,9 +1,6 @@
 package com.mpapp.mp;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "WEEK")
@@ -12,9 +9,16 @@ public class Week {
     private String weekID;
     @Column(name = "NOTES")
     private String notes;
-    @Id
     @Column(name = "DAY")
     private String day;
+    @Column(name="MENU")
+    private String menu;
+    @Column(name="MEALID")
+    private int mealID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="DAYID")
+    private int dayID;
 
     public String getWeekID() { return weekID; }
     public void setWeekID(String weekID) {
@@ -29,5 +33,21 @@ public class Week {
 
     public void setDay(String day) {
         this.day = day;
+    }
+
+    public String getMenu() {
+        return menu;
+    }
+
+    public void setMenu(String menu) {
+        this.menu = menu;
+    }
+
+    public int getMealID() {
+        return mealID;
+    }
+
+    public void setMealID(int mealID) {
+        this.mealID = mealID;
     }
 }
