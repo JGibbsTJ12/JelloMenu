@@ -16,11 +16,11 @@ public class Main {
         JLabel l1 = new JLabel("Welcome to Unnamed Meal Plan App");
         l1.setBounds(175, 0, 200, 25);
         JButton bEditMeals = new JButton("Edit Meal List");
-        bEditMeals.setBounds(175, 50, 200, 25);
+        bEditMeals.setBounds(150, 50, 250, 25);
         JButton bSortPlan = new JButton("Organize Meal Plan");
-        bSortPlan.setBounds(175, 80, 200, 25);
-        JButton bViewList = new JButton("View Shopping List");
-        bViewList.setBounds(175, 110, 200, 25);
+        bSortPlan.setBounds(150, 80, 250, 25);
+        JButton bViewList = new JButton("View Meal Plan and Shopping List");
+        bViewList.setBounds(150, 110, 250, 25);
         JLabel l2 = new JLabel("Tip: " + totd);
         l2.setBounds(100, 225, 200, 25);
         f.add(l1); f.add(bEditMeals); f.add(bSortPlan); f.add(bViewList); f.add(l2);
@@ -40,6 +40,12 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 OrganizePlan.SortPlan();
+            }
+        });
+        bViewList.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ViewPlan.ViewList();
             }
         });
     }

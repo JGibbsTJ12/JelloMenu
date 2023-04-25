@@ -10,6 +10,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -74,8 +76,8 @@ public class OrganizePlan {
             meals3[a + 1] = mealList[a];
         }
 
-        JFrame f = new JFrame("Organize Meal Plan");
-        JPanel p = new JPanel(); f.setSize(600, 300);
+        JFrame f = new JFrame("Organize Meal Plan"); f.setSize(600, 300);
+        JPanel p = new JPanel();
         JButton cf = new JButton("Confirm"); cf.setBounds(475, 230, 100, 25);
         p.setBounds(0, 0, 400, 1000);
         JScrollPane opp = new JScrollPane(p); opp.setBounds(150, 10, 400, 210);
@@ -114,8 +116,47 @@ public class OrganizePlan {
                 wa[dbIndexb].setMealID(meal1.getSelectedIndex());
                 wa[dbIndexl].setMealID(meal2.getSelectedIndex());
                 wa[dbIndexd].setMealID(meal3.getSelectedIndex());
+                session.merge(wa[dbIndexb]);
+                session.merge(wa[dbIndexl]);
+                session.merge(wa[dbIndexd]);
                 session.getTransaction().commit();
+            }
+        });
+
+        f.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
                 session.close();
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+
             }
         });
     }
