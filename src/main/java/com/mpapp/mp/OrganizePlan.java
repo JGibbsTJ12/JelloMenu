@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
+import java.util.Arrays;
 import java.util.List;
 
 public class OrganizePlan {
@@ -48,22 +49,30 @@ public class OrganizePlan {
         int c = 0;
         for(int a = 0; a < 21; a++) {
             wa[a].setWeekID(weekList[weekList.length - 1]);
-            if (b >= 7) {
+            if (b == 7) {
                 b = 0;
             }
             wa[a].setDay(days[b]);
-            if (c >= 3) {
+            if (c == 2)
+                b++;
+            if (c == 3) {
                 c = 0;
             }
             wa[a].setMenu(menu[c]);
             c++;
-            b++;
             session.persist(wa[a]);
         }
         session.getTransaction().commit();
-        session.close();
 
-
+        int l = mealList.length + 1;
+        String[] meals1 = new String[l]; meals1[0] = "Breakfast";
+        String[] meals2 = new String[l]; meals2[0] = "Lunch";
+        String[] meals3 = new String[l]; meals3[0] = "Dinner";
+        for(int a = 0; a < mealList.length; a++){
+            meals1[a + 1] = mealList[a];
+            meals2[a + 1] = mealList[a];
+            meals3[a + 1] = mealList[a];
+        }
 
         JFrame f = new JFrame("Organize Meal Plan");
         JPanel p = new JPanel(); f.setSize(600, 300);
@@ -74,9 +83,9 @@ public class OrganizePlan {
         opp.setBorder(BorderFactory.createTitledBorder("Week"));
         JComboBox day1 = new JComboBox(days);
         day1.setBounds(5, 5, 125, 25);
-        JComboBox meal1 = new JComboBox(menu); meal1.setSelectedIndex(0);
-        JComboBox meal2 = new JComboBox(menu); meal2.setSelectedIndex(1);
-        JComboBox meal3 = new JComboBox(menu); meal3.setSelectedIndex(2);
+        JComboBox meal1 = new JComboBox(meals1);
+        JComboBox meal2 = new JComboBox(meals2);
+        JComboBox meal3 = new JComboBox(meals3);
         JTextArea mta = new JTextArea("Notes");
         mta.setLineWrap(true);
         mta.setBounds(5, 75, 380, 125);
@@ -93,6 +102,22 @@ public class OrganizePlan {
         p.setLayout(null);
         f.setLayout(null);
         f.setVisible(true);
+
+        cf.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                session.beginTransaction();
+                //Index "Algorithm" x * 3 + (y + 1) = z
+                int dbIndexb = (day1.getSelectedIndex() * 3);
+                int dbIndexl = (day1.getSelectedIndex() * 3) + 1;
+                int dbIndexd = (day1.getSelectedIndex() * 3) + 2;
+                wa[dbIndexb].setMealID(meal1.getSelectedIndex());
+                wa[dbIndexl].setMealID(meal2.getSelectedIndex());
+                wa[dbIndexd].setMealID(meal3.getSelectedIndex());
+                session.getTransaction().commit();
+                session.close();
+            }
+        });
     }
 
     public static String newWeek(){

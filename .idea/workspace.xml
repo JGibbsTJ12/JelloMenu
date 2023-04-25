@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="71560842-5995-4940-8450-8b6f31102701" name="Changes" comment="OrganizePlan Updated, Currently Adds Empty Week to DB">
+    <list default="true" id="71560842-5995-4940-8450-8b6f31102701" name="Changes" comment="OrganizePlan Actually Reworked and Almost Finished">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Meal.db" beforeDir="false" afterPath="$PROJECT_DIR$/Meal.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/DayMenuMeal.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/OrganizePlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/OrganizePlan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/Week.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/Week.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/WeekDayMenu.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,7 +171,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682272049443</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="OrganizePlan Actually Reworked and Almost Finished">
+      <created>1682360907377</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1682360907377</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -191,7 +195,8 @@
     <MESSAGE value="OrganizePlan Functionality WIP" />
     <MESSAGE value="OrganizePlan Functionality WIP, Pushing In Case I mess Everything Up" />
     <MESSAGE value="OrganizePlan Updated, Currently Adds Empty Week to DB" />
-    <option name="LAST_COMMIT_MESSAGE" value="OrganizePlan Updated, Currently Adds Empty Week to DB" />
+    <MESSAGE value="OrganizePlan Actually Reworked and Almost Finished" />
+    <option name="LAST_COMMIT_MESSAGE" value="OrganizePlan Actually Reworked and Almost Finished" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MealPlanApp$Main.ic" NAME="Main Coverage Results" MODIFIED="1679629887734" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
