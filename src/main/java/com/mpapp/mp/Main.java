@@ -13,8 +13,8 @@ public class Main {
         //Home Screen Initialization
         FlatLightLaf.setup();
         JFrame f = new JFrame("Main Menu");
-        JLabel l1 = new JLabel("Welcome to Unnamed Meal Plan App");
-        l1.setBounds(175, 0, 200, 25);
+        JLabel l1 = new JLabel("Welcome to JelloMenu!");
+        l1.setBounds(210, 0, 200, 25);
         JButton bEditMeals = new JButton("Edit Meal List");
         bEditMeals.setBounds(150, 50, 250, 25);
         JButton bSortPlan = new JButton("Organize Meal Plan");
