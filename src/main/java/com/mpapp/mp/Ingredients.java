@@ -5,8 +5,6 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "INGREDIENTS")
 public class Ingredients {
-
-
     @Column(name = "NAME")
     private String name;
     @Column(name = "AMOUNT")

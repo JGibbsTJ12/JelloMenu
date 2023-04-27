@@ -9,6 +9,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.List;
 
 import javax.swing.*;
@@ -33,10 +35,10 @@ public class EditMealList{
         f.setLayout(null);
         f.setVisible(true);
 
-        //Add Meal Button Functionality
         bAddMeal.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Add Meal Button to addMeal method, selected text will fill into the name field
                 if (tf.getSelectedText() != "" | tf.getSelectedText() != null) {
                     addMeal(tf.getSelectedText());
                 }
@@ -45,6 +47,7 @@ public class EditMealList{
 
         //Add Ingredients Functionality
         bAddIng.addActionListener(new ActionListener() {
+            //Add Ingredient Button to addIng method
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (tf.getSelectedText() != "" | tf.getSelectedText() != null) {
@@ -54,6 +57,17 @@ public class EditMealList{
         });
     }
     public static void addMeal(String m){
+        //Creates the hibernate metadata and session factory
+        final StandardServiceRegistry ssr = new StandardServiceRegistryBuilder()
+                .configure().build();
+        Metadata metadata = new MetadataSources(ssr)
+                .addAnnotatedClass(Meals.class)
+                .addAnnotatedClass(MealIngJunc.class)
+                .getMetadataBuilder()
+                .build();
+        SessionFactory sessionFactory = metadata.getSessionFactoryBuilder()
+                .build();
+
         //Add Meal Window
         JFrame amf = new JFrame("Add Meal");
         amf.setSize(300,200);
@@ -74,21 +88,10 @@ public class EditMealList{
         amf.setVisible(true);
 
         my.addActionListener(new ActionListener() {
+            /*Confirm button
+            Starts a new session, adds each field to the database and saves it then clears all fields */
             @Override
             public void actionPerformed(ActionEvent f) {
-                //Add Meal Functionality
-                //DB Init
-                final StandardServiceRegistry ssr = new StandardServiceRegistryBuilder()
-                        .configure().build();
-                Metadata metadata = new MetadataSources(ssr)
-                        .addAnnotatedClass(Meals.class)
-                        .addAnnotatedClass(MealIngJunc.class)
-                        .getMetadataBuilder()
-                        .build();
-                SessionFactory sessionFactory = metadata.getSessionFactoryBuilder()
-                        .build();
-                System.out.println("DB Init Successful");
-
                 //Adding meal to meal table
                 Session session = sessionFactory.openSession();
                 session.beginTransaction();
@@ -98,16 +101,51 @@ public class EditMealList{
                     session.persist(m1);
                     session.getTransaction().commit();
                     System.out.println("DB Save Success");
-                    sessionFactory.close();
-                    session.close();
-                amf.setVisible(false);
-                amf.dispose();
+                mnf.setText("");
+                msf.setText("");
+            }
+        });
+
+        amf.addWindowListener(new WindowListener() {
+            //Window listener to ensure hibernate session closes properly
+            @Override
+            public void windowOpened(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+                sessionFactory.close();
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+
             }
         });
     }
     public static void addIng(String i){
-        //Generating List of Meals for Window
-        //AddIngredient Functionality
+        //Hibernate session factory creation
         final StandardServiceRegistry ssr = new StandardServiceRegistryBuilder()
                 .configure().build();
         Metadata metadata = new MetadataSources(ssr)
@@ -119,6 +157,8 @@ public class EditMealList{
                 .build();
         System.out.println("DB Init Successful");
         Session session = sessionFactory.openSession();
+
+        //Hibernate query to get list of meals for use in adding ingredients
         List results = session.createQuery("SELECT name FROM Meals").list();
         sessionFactory.close();
         session.close();
@@ -126,7 +166,7 @@ public class EditMealList{
         for(int x = 0; x < results.size(); x++)
             mealList[x] = (String) results.get(x);
 
-        //Window Init
+        //Window Creation
         JFrame aif = new JFrame("Add Ingredients");
         aif.setSize(270,300);
         JLabel ic = new JLabel("Configure Ingredient");
@@ -159,7 +199,7 @@ public class EditMealList{
         iy.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //DB Init
+                //Hibernate session creation
                 final StandardServiceRegistry ssr = new StandardServiceRegistryBuilder()
                         .configure().build();
                 Metadata metadata = new MetadataSources(ssr)
@@ -171,7 +211,7 @@ public class EditMealList{
                 SessionFactory sessionFactory = metadata.getSessionFactoryBuilder()
                         .build();
                 /*Adds Ingredient to Ingredient Table and Junctions
-                Meal and Ingredient to Junction Table*/
+                Meal and Ingredient to Junction Table, clears fields after completion*/
                 Session session = sessionFactory.openSession();
                 session.beginTransaction();
                     Ingredients i = new Ingredients();
@@ -185,9 +225,32 @@ public class EditMealList{
                     session.persist(mij);
                     session.getTransaction().commit();
                     System.out.println("DB Save Success");
-                    session.close();
-                    sessionFactory.close();
+                inf.setText("");
+                isf.setText("");
+                icb.setSelectedIndex(0);
+                iml.setSelectedIndex(0);
             }
+        });
+
+        aif.addWindowListener(new WindowListener() {
+            //Window listener to ensure hibernate session is closed
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                session.close();
+                sessionFactory.close();
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
         });
     }
 }

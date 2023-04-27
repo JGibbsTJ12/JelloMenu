@@ -12,15 +12,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
-import java.util.Arrays;
 import java.util.List;
 
 public class OrganizePlan {
     public static void SortPlan() {
+        //Hibernate session creation
         final StandardServiceRegistry ssr = new StandardServiceRegistryBuilder()
                 .configure().build();
         Metadata metadata = new MetadataSources(ssr)
@@ -33,13 +32,17 @@ public class OrganizePlan {
                 .build();
         Session session = sessionFactory.openSession();
 
+        //Query to receive weekids and meal names from database for further use
         List results1 = session.createQuery("SELECT weekID from Week").list();
         List results2 = session.createQuery("SELECT name FROM Meals").list();
+        //Converts lists into arrays for combo box usage
         String[] weekList = new String[results1.size() + 1];
         String[] mealList = new String[results2.size()];
-        listtoArr(results1, weekList);
-        listtoArr(results2, mealList);
+        slisttoArr(results1, weekList);
+        slisttoArr(results2, mealList);
         weekList[weekList.length - 1] = newWeek();
+
+        //Creates 21 week objects for each meal and each day
         session.beginTransaction();
         Week w1 = new Week(); Week w2 = new Week(); Week w3 = new Week(); Week w4 = new Week(); Week w5 = new Week(); Week w6 = new Week(); Week w7 = new Week();
         Week w8 = new Week(); Week w9 = new Week(); Week w10 = new Week(); Week w11 = new Week(); Week w12 = new Week(); Week w13 = new Week(); Week w14 = new Week();
@@ -49,6 +52,7 @@ public class OrganizePlan {
         String[] menu = new String[] {"Breakfast", "Lunch", "Dinner"};
         int b = 0;
         int c = 0;
+        //This for loop iteratively sets each field in the database based on the arrays using math
         for(int a = 0; a < 21; a++) {
             wa[a].setWeekID(weekList[weekList.length - 1]);
             if (b == 7) {
@@ -66,6 +70,7 @@ public class OrganizePlan {
         }
         session.getTransaction().commit();
 
+        //Array creation for combo boxes
         int l = mealList.length + 1;
         String[] meals1 = new String[l]; meals1[0] = "Breakfast";
         String[] meals2 = new String[l]; meals2[0] = "Lunch";
@@ -76,6 +81,7 @@ public class OrganizePlan {
             meals3[a + 1] = mealList[a];
         }
 
+        //Window Setup
         JFrame f = new JFrame("Organize Meal Plan"); f.setSize(600, 300);
         JPanel p = new JPanel();
         JButton cf = new JButton("Confirm"); cf.setBounds(475, 230, 100, 25);
@@ -106,6 +112,8 @@ public class OrganizePlan {
         f.setVisible(true);
 
         cf.addActionListener(new ActionListener() {
+            /* Confirm Meal Button
+            Starts a hibernate session, uses math with dayids in the database to properly index and input meals into the database*/
             @Override
             public void actionPerformed(ActionEvent e) {
                 session.beginTransaction();
@@ -124,6 +132,7 @@ public class OrganizePlan {
         });
 
         f.addWindowListener(new WindowListener() {
+            //Window listener to ensure hibernate session is properly closed
             @Override
             public void windowOpened(WindowEvent e) {
 
@@ -137,6 +146,7 @@ public class OrganizePlan {
             @Override
             public void windowClosed(WindowEvent e) {
                 session.close();
+                sessionFactory.close();
             }
 
             @Override
@@ -162,14 +172,23 @@ public class OrganizePlan {
     }
 
     public static String newWeek(){
+        //Creates a date for the next monday from system date
         LocalDate date = LocalDate.now();
         date = date.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
         return date.toString();
     }
 
-    public static String[] listtoArr(List l, String[] a){
+    public static String[] slisttoArr(List l, String[] a){
+        //Converts a string list into a string array
         for(int x = 0; x < l.size(); x++)
             a[x] = (String) l.get(x);
+        return a;
+    }
+
+    public static int[] ilisttoArr(List l, int[] a){
+        //Converts an integer list into an integer array
+        for(int x = 0; x < l.size(); x++)
+            a[x] = (int) l.get(x);
         return a;
     }
 }
