@@ -73,6 +73,7 @@ public class ViewPlan {
         for(int i = 0; i < iN.length; i++){
             shopList.append(iN[i] + ": " + iAmt[i] + " " + iMsmt[i] + "\n");
         }
+        shopList.isEditable();
         shopList.setBounds(10, 10, 335, 980);
         p1.add(shopList);
         f.add(opp); f.add(opp1);

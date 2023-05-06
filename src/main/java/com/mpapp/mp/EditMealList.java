@@ -74,7 +74,7 @@ public class EditMealList{
         JLabel mc = new JLabel("Configure Meal");
         mc.setBounds(5, 5, 100, 25);
         JLabel mn = new JLabel("Name:");
-        JTextField mnf = new JTextField(m);
+        JTextField mnf = new JTextField();
         mn.setBounds(10, 45, 100, 25);
         mnf.setBounds(110, 45, 100, 25);
         JLabel ms = new JLabel("Serving Count:");
@@ -92,17 +92,25 @@ public class EditMealList{
             Starts a new session, adds each field to the database and saves it then clears all fields */
             @Override
             public void actionPerformed(ActionEvent f) {
-                //Adding meal to meal table
-                Session session = sessionFactory.openSession();
-                session.beginTransaction();
+                //Adding meal to meal table with Input Validation
+                if(!msf.getText().matches("\\d+")){
+                    JOptionPane.showMessageDialog(null, "Please enter a number for Serving Count");
+                }
+                else if(!mnf.getText().matches("[A-Za-z]+")){
+                    JOptionPane.showMessageDialog(null, "Please enter text for Meal Name");
+                }
+                else {
+                    Session session = sessionFactory.openSession();
+                    session.beginTransaction();
                     Meals m1 = new Meals();
                     m1.setName(mnf.getText());
                     m1.setServings(Integer.parseInt(msf.getText()));
                     session.persist(m1);
                     session.getTransaction().commit();
                     System.out.println("DB Save Success");
-                mnf.setText("");
-                msf.setText("");
+                    mnf.setText("");
+                    msf.setText("");
+                }
             }
         });
 
@@ -211,9 +219,14 @@ public class EditMealList{
                 SessionFactory sessionFactory = metadata.getSessionFactoryBuilder()
                         .build();
                 /*Adds Ingredient to Ingredient Table and Junctions
-                Meal and Ingredient to Junction Table, clears fields after completion*/
-                Session session = sessionFactory.openSession();
-                session.beginTransaction();
+                Meal and Ingredient to Junction Table, clears fields after completion with Input Validation*/
+                if(!inf.getText().matches("[A-Za-z]+")){
+                    JOptionPane.showMessageDialog(null, "Please enter a name for Ingredient Name");
+                } else if(isf.getText().matches("\\d+")){
+                    JOptionPane.showMessageDialog(null, "Please enter a number for Ingredient Amount");
+                } else {
+                    Session session = sessionFactory.openSession();
+                    session.beginTransaction();
                     Ingredients i = new Ingredients();
                     MealIngJunc mij = new MealIngJunc();
                     i.setName(inf.getText());
@@ -225,10 +238,11 @@ public class EditMealList{
                     session.persist(mij);
                     session.getTransaction().commit();
                     System.out.println("DB Save Success");
-                inf.setText("");
-                isf.setText("");
-                icb.setSelectedIndex(0);
-                iml.setSelectedIndex(0);
+                    inf.setText("");
+                    isf.setText("");
+                    icb.setSelectedIndex(0);
+                    iml.setSelectedIndex(0);
+                }
             }
         });
 
