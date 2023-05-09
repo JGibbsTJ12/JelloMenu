@@ -12,9 +12,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.sql.Array;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrganizePlan {
@@ -33,15 +35,15 @@ public class OrganizePlan {
         Session session = sessionFactory.openSession();
 
         //Query to receive weekids and meal names from database for further use
-        List results1 = session.createQuery("SELECT weekID from Week").list();
+        List results1 = session.createQuery("SELECT DISTINCT weekID FROM Week").list();
         List results2 = session.createQuery("SELECT name FROM Meals").list();
         //Converts lists into arrays for combo box usage
-        String[] weekList = new String[results1.size() + 1];
+        ArrayList<String> weekList = new ArrayList<String>();
+        weekList.addAll(results1);
         String[] mealList = new String[results2.size()];
-        slisttoArr(results1, weekList);
         slisttoArr(results2, mealList);
-        if(results1.size() == 0) {
-            weekList[weekList.length - 1] = newWeek();
+        if(weekList.size() == 0){
+            weekList.add(newWeek());
         }
 
         //Array creation for combo boxes
@@ -58,28 +60,6 @@ public class OrganizePlan {
         //Creates 21 week objects for each meal and each day
         String[] days = new String[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
         String[] menu = new String[] {"Breakfast", "Lunch", "Dinner"};
-        if(results1.size() == 0){
-            session.beginTransaction();
-            int b = 0;
-            int c = 0;
-            for(int a = 0; a < 21; a++) {
-                Week w = new Week();
-                w.setWeekID(weekList[0]);
-                if (b == 7) {
-                    b = 0;
-                }
-                w.setDay(days[b]);
-                if (c == 2)
-                    b++;
-                if (c == 3) {
-                    c = 0;
-                }
-                w.setMenu(menu[c]);
-                c++;
-                session.persist(w);
-            }
-            session.getTransaction().commit();
-        }
 
         //Window Setup
         JFrame f = new JFrame("Organize Meal Plan"); f.setSize(600, 300);
@@ -100,7 +80,7 @@ public class OrganizePlan {
         meal1.setBounds(5, 40, 90, 25);
         meal2.setBounds(105, 40, 90, 25);
         meal3.setBounds(205, 40, 90, 25);
-        JComboBox wcb = new JComboBox(weekList);
+        JComboBox wcb = new JComboBox();
         JButton nwb = new JButton("New");
         wcb.setBounds(5, 10, 120, 25);
         nwb.setBounds(5, 45, 60, 25);
@@ -110,24 +90,40 @@ public class OrganizePlan {
         f.setLayout(null);
         f.setVisible(true);
 
+        if(weekList.size() == 1){
+            session.beginTransaction();
+            int b = 0;
+            int c = 0;
+            for(int a = 0; a < 21; a++) {
+                Week w = new Week();
+                w.setWeekID(weekList.get(0));
+                if (b == 7) {
+                    b = 0;
+                }
+                w.setDay(days[b]);
+                if (c == 2)
+                    b++;
+                if (c == 3) {
+                    c = 0;
+                }
+                w.setMenu(menu[c]);
+                c++;
+                session.persist(w);
+            }
+            session.getTransaction().commit();
+            wcb.addItem(weekList.get(0));
+        }
+
         nwb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int h = 0;
-                //Needs polymorhpism ughhhhhhhhhhhhhhh
-                for(int i = 0; i < weekList.length; i++){
-                    if(weekList[i] == null){
-                        weekList[i] = newWeekTest();
-                        h = i;
-                        break;
-                    }
-                }
+                weekList.add(newWeek());
                 session.beginTransaction();
                 int b = 0;
                 int c = 0;
                 for(int a = 0; a < 21; a++) {
                     Week w = new Week();
-                    w.setWeekID(weekList[h]);
+                    w.setWeekID(weekList.get(weekList.size() - 1));
                     if (b == 7) {
                         b = 0;
                     }
@@ -142,7 +138,8 @@ public class OrganizePlan {
                     session.persist(w);
                 }
                 session.getTransaction().commit();
-                wcb.setSelectedIndex(h);
+                wcb.addItem(weekList.get(weekList.size() - 1));
+                wcb.setSelectedIndex(weekList.size() - 1);
             }
         });
         cf.addActionListener(new ActionListener() {
@@ -212,13 +209,6 @@ public class OrganizePlan {
         //Creates a date for the next monday from system date
         LocalDate date = LocalDate.now();
         date = date.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
-        return date.toString();
-    }
-
-    public static String newWeekTest(){
-        //Creates a date for the next monday from system date
-        LocalDate date = LocalDate.now();
-        date = date.with(TemporalAdjusters.next(DayOfWeek.TUESDAY));
         return date.toString();
     }
 
