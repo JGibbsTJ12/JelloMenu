@@ -8,10 +8,8 @@ Each Window has its own class that performs its specific task
 App is packaged with gradle, so run via Gradle as you would any other
 
 ## Current Plans:
-1. Add multi-week functionality to OrganizePlan with the ability to update past weeks
-2. More Delete Functionality
-3. Shopping List Multiplies Amount by Servings
-4. Make object names more readable
+1. More Delete Functionality
+2. Shopping List Multiplies Amount by Servings
 
 ## Thing I've Learned:
 Need to learn better data structures
