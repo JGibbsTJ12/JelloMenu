@@ -82,10 +82,12 @@ public class OrganizePlan {
         meal3.setBounds(205, 40, 90, 25);
         JComboBox wcb = new JComboBox();
         JButton nwb = new JButton("New");
+        JButton dwb = new JButton("Delete");
         wcb.setBounds(5, 10, 120, 25);
-        nwb.setBounds(5, 45, 60, 25);
+        nwb.setBounds(5, 45, 80, 25);
+        dwb.setBounds(5, 75, 80, 25);
         p.add(day1); p.add(meal1); p.add(meal2); p.add(meal3); p.add(mta);
-        f.add(opp); f.add(cf); f.add(wcb); f.add(nwb);
+        f.add(opp); f.add(cf); f.add(wcb); f.add(nwb); f.add(dwb);
         p.setLayout(null);
         f.setLayout(null);
         f.setVisible(true);
@@ -162,6 +164,21 @@ public class OrganizePlan {
                 session.merge(w1);
                 session.merge(w2);
                 session.getTransaction().commit();
+            }
+        });
+
+        dwb.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                session.beginTransaction();
+                int weektoID = wcb.getSelectedIndex() + 1;
+                for(int i = 1; i <= 21; i++){
+                    Week w = session.load(Week.class, weektoID * i);
+                    session.remove(w);
+                }
+                session.getTransaction().commit();
+                wcb.removeItem(wcb.getSelectedIndex());
+                wcb.setSelectedIndex(0);
             }
         });
 

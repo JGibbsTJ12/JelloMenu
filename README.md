@@ -8,8 +8,7 @@ Each Window has its own class that performs its specific task
 App is packaged with gradle, so run via Gradle as you would any other
 
 ## Current Plans:
-1. More Delete Functionality
-2. Shopping List Multiplies Amount by Servings
+1. Shopping List Multiplies Amount by Servings
 
 ## Thing I've Learned:
 Need to learn better data structures

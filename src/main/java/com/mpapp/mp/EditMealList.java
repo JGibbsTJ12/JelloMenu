@@ -222,7 +222,7 @@ public class EditMealList{
                 Meal and Ingredient to Junction Table, clears fields after completion with Input Validation*/
                 if(!inf.getText().matches("[A-Za-z]+")){
                     JOptionPane.showMessageDialog(null, "Please enter a name for Ingredient Name");
-                } else if(isf.getText().matches("\\d+")){
+                } else if(!isf.getText().matches("\\d+")){
                     JOptionPane.showMessageDialog(null, "Please enter a number for Ingredient Amount");
                 } else {
                     Session session = sessionFactory.openSession();
