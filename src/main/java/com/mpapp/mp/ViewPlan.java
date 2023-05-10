@@ -20,6 +20,7 @@ public class ViewPlan {
                 .addAnnotatedClass(Meals.class)
                 .addAnnotatedClass(Ingredients.class)
                 .addAnnotatedClass(Week.class)
+                .addAnnotatedClass(MealIngJunc.class)
                 .getMetadataBuilder()
                 .build();
         SessionFactory sessionFactory = metadata.getSessionFactoryBuilder()
@@ -32,6 +33,7 @@ public class ViewPlan {
         List ingResults = session.createQuery("SELECT name FROM Ingredients").list();
         List ingAmtResults = session.createQuery("SELECT amount FROM Ingredients").list();
         List ingMsmtResults = session.createQuery("SELECT amtmsmt FROM Ingredients").list();
+
         //Adds queries to array for combobox usage
         int[] mID = new int[mealResults.size()];
         int[] iAmt = new int[ingAmtResults.size()];
@@ -70,8 +72,13 @@ public class ViewPlan {
         }
         //This for loop adds each ingredient with its amount to the Shopping List text area
         JTextArea shopList = new JTextArea();
+        int ingServings = 0;
         for(int i = 0; i < iN.length; i++){
-            shopList.append(iN[i] + ": " + iAmt[i] + " " + iMsmt[i] + "\n");
+            MealIngJunc mij = session.load(MealIngJunc.class, i + 1);
+            Ingredients iM = session.load(Ingredients.class, i + 1);
+            Meals m = session.load(Meals.class, mij.getMealid());
+            ingServings = m.getServings() * iM.getAmount();
+            shopList.append(iN[i] + ": " + ingServings + " " + iMsmt[i] + "\n");
         }
         shopList.isEditable();
         shopList.setBounds(10, 10, 335, 980);

@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="71560842-5995-4940-8450-8b6f31102701" name="Changes" comment="Updated readme">
+    <list default="true" id="71560842-5995-4940-8450-8b6f31102701" name="Changes" comment="OrganizePlan now allows for deleting Weeks, Fixed input validation issue in EditMealList">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Meal.db" beforeDir="false" afterPath="$PROJECT_DIR$/Meal.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/OrganizePlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/OrganizePlan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/MealIngJunc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/MealIngJunc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/ViewPlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/mpapp/mp/ViewPlan.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -242,7 +242,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683656668771</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="OrganizePlan now allows for deleting Weeks, Fixed input validation issue in EditMealList">
+      <created>1683693081432</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1683693081432</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -280,7 +287,8 @@
     <MESSAGE value="Major update to OrganizePlan, can now update weeks" />
     <MESSAGE value="Another Major Update to OrganizePlan. The weeklist is now stored in an arraylist that is updated by the db on load." />
     <MESSAGE value="Updated readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated readme" />
+    <MESSAGE value="OrganizePlan now allows for deleting Weeks, Fixed input validation issue in EditMealList" />
+    <option name="LAST_COMMIT_MESSAGE" value="OrganizePlan now allows for deleting Weeks, Fixed input validation issue in EditMealList" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MealPlanApp$Main.ic" NAME="Main Coverage Results" MODIFIED="1679629887734" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

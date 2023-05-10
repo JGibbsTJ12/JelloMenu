@@ -8,9 +8,9 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "MEAL_ING_JUNC")
 public class MealIngJunc {
-    @Id
     @Column(name="MEALID")
     private int mealid;
+    @Id
     @Column(name="INGID")
     private int ingid;
 
