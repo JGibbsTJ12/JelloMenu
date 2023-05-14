@@ -23,5 +23,6 @@ Finally you can view the shopping list and your meal plan on the final menu.
 ![](https://files.catbox.moe/3t09ti.png)
 
 ## Installation
-App is packaged with gradle, so run via Gradle as you would any other
+App is packaged with gradle, so run via Gradle as you would any other.
+
 SQLite is required for this app to work.
